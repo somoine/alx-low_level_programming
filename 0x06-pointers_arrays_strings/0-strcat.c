@@ -6,22 +6,25 @@
  * @n: size of second string
  * Return: Always 0.
  */
-char *_strncat(char *dest, char *src, int n)
-{
-	int lengthD, lengthS;
+#include <stddef.h>
 
-	lengthD = 0;
-	lengthS = 0;
+char *_strcat(char *dest, char *src) {
+    // Find the end of the destination string
+    char *dest_end = dest;
+    while (*dest_end != '\0') {
+        dest_end++;
+    }
 
-	while (*(dest + lengthD) != '\0')
-		lengthD++;
+    // Append the source string to the destination string
+    while (*src != '\0') {
+        *dest_end = *src;
+        dest_end++;
+        src++;
+    }
 
-	while (*(src + lengthS) != '\0' && lengthD < 97 && lengthS < n)
-	{
-		*(dest + lengthD) = *(src + lengthS);
-		lengthD++;
-		lengthS++;
-	}
-	*(dest + lengthD) = '\0';
-	return (dest);
+    // Add the terminating null byte
+    *dest_end = '\0';
+
+    return dest;
 }
+
